@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles can go here */
+@layer base {
+  html {
+    font-family: "Khula", system-ui, sans-serif;
+  }
+  body {
+    background-color: #ffffff;
+  }
+
+  .layout {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+} 
+

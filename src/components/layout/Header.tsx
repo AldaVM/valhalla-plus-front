@@ -13,7 +13,6 @@ const Header = () => {
     maxTokensAllowed,
     setActiveSessions,
     setMaxTokensAllowed,
-    logout,
   } = useAuth();
   const [showDrawer, setShowDrawer] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);

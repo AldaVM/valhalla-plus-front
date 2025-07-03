@@ -3,18 +3,6 @@ import { Link } from "react-router-dom";
 import { getRoadmapsApi } from "../../services/roadmaps/api";
 import { Helmet } from "react-helmet";
 
-// Hook personalizado para animaciones de entrada
-const useFadeIn = (delay: number = 0) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay);
-    return () => clearTimeout(timer);
-  }, [delay]);
-
-  return isVisible;
-};
-
 interface RoadmapContextProps {
   roadmap: any | null;
   title: any | null;

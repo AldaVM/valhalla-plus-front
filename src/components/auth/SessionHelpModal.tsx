@@ -1,3 +1,8 @@
+interface SessionHelpModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 const SessionHelpModal = ({ isOpen, onClose }: SessionHelpModalProps) => {
   if (!isOpen) return null;
 

@@ -1,3 +1,8 @@
+interface SessionInfoProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 const SessionInfo = ({ isOpen, onClose }: SessionInfoProps) => {
   if (!isOpen) return null;
 

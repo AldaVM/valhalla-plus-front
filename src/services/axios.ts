@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //TODO
-const API_URL = "https://valhalla-plus-rest.onrender.com/api/v1";
+const API_URL = "http://localhost:3000/api/v1";
 
 // Crear instancia de axios
 const api = axios.create({

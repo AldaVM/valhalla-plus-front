@@ -102,7 +102,7 @@ function CoursePage() {
 
   return (
     <div className="min-h-screen w-full bg-white">
-      <div className="max-w-4xl sm:max-w-none mx-auto py-4">
+      <div className="max-w-4xl mx-auto py-4">
         {roadmap && (
           <div className="mb-2 text-xs text-gray-500 uppercase tracking-wider">
             <span className="font-medium">Roadmap:</span>{" "}
@@ -114,7 +114,7 @@ function CoursePage() {
             </Link>
           </div>
         )}
-        <h1 className="text-2xl sm:text-3xl font-medium text-black mb-2 uppercase tracking-wide">
+        <h1 className="text-3xl font-medium text-black mb-2 uppercase tracking-wide">
           {course?.course.title}
         </h1>
         <div className="mb-4 text-sm text-gray-700">

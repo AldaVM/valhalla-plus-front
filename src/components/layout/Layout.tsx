@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="layout w-full min-h-screen bg-white flex flex-col">
       <Header />
-      <main className="flex-1 w-full px-6 py-4">{children}</main>
+      <main className="flex-1 w-full px-2 sm:px-8 py-4">{children}</main>
       <Footer />
 
       {/* Notificación de sesiones */}

@@ -37,7 +37,7 @@ const HomePage = () => {
         <title>Valhalla Jiu Jitsu + | Plataforma de Aprendizaje</title>
       </Helmet>
       {/* Header HomePage */}
-      <header className="w-full flex items-center justify-between px-8 py-4 border-b border-black">
+      <header className="w-full flex flex-col sm:flex-row items-center justify-between px-2 sm:px-8 py-2 sm:py-4 border-b border-black gap-2 sm:gap-0">
         <div className="flex items-center gap-2">
           <img src="/valhalla-icon.png" alt="Valhalla Logo" className="h-8 w-8" />
           <span className="font-bold text-xl tracking-widest uppercase text-black">Valhalla</span>
@@ -46,20 +46,20 @@ const HomePage = () => {
           to="/login"
           tabIndex={0}
           aria-label="Iniciar sesión"
-          className="px-6 py-2 bg-black text-white font-bold uppercase tracking-wider rounded border-2 border-black hover:bg-white hover:text-black transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-full sm:w-auto block bg-black text-white font-bold uppercase tracking-wider rounded border-2 border-black hover:bg-white hover:text-black transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black px-4 py-1 text-sm min-h-[2.25rem] text-center"
         >
           Iniciar Sesión
         </Link>
       </header>
       {/* Banner Section */}
-      <section className="w-full bg-white text-black py-16 md:py-24 px-8">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 uppercase tracking-wider">VALHALLA JIU JITSU +</h1>
-        <p className="text-lg md:text-2xl mb-8 max-w-2xl">Domina el arte del Jiu Jitsu con nuestras rutas de aprendizaje estructuradas y contenido de alta calidad</p>
+      <section className="w-full bg-white text-black py-8 md:py-24 px-2 sm:px-8">
+        <h1 className="text-2xl md:text-6xl font-bold mb-4 uppercase tracking-wider">VALHALLA JIU JITSU +</h1>
+        <p className="text-base md:text-2xl mb-8 max-w-2xl">Domina el arte del Jiu Jitsu con nuestras rutas de aprendizaje estructuradas y contenido de alta calidad</p>
       </section>
       {/* Rutas de Aprendizaje alineadas a la izquierda */}
-      <section className="w-full py-4 md:py-8 px-8">
+      <section className="w-full py-2 md:py-8 px-2 sm:px-8">
         <div className="max-w mx-auto">
-          <h2 className="text-2xl md:text-2xl font-bold uppercase tracking-wide mb-6 text-left text-black">RUTAS DE APRENDIZAJE</h2>
+          <h2 className="text-lg md:text-2xl font-bold uppercase tracking-wide mb-6 text-left text-black">RUTAS DE APRENDIZAJE</h2>
           {isLoading ? (
             <div className="flex justify-start items-center py-24">
               <div className="animate-spin rounded-full h-12 w-12 border-2 border-black border-t-transparent"></div>

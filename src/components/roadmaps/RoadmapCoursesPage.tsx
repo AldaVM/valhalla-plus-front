@@ -143,14 +143,15 @@ const RoadmapCoursesPage = () => {
           <div className="flex border border-gray-300">
             <button
               onClick={() => setViewMode("cards")}
-              className={`px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 text-sm font-medium transition-colors duration-200 flex items-center justify-center sm:justify-start ${
                 viewMode === "cards"
                   ? "bg-black text-white"
                   : "bg-white text-gray-700 hover:bg-gray-50"
               }`}
+              aria-label="Vista de tarjetas"
             >
               <svg
-                className="w-4 h-4 inline-block mr-2"
+                className="w-5 h-5 sm:mr-2"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -162,18 +163,19 @@ const RoadmapCoursesPage = () => {
                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                 />
               </svg>
-              Tarjetas
+              <span className="hidden sm:inline">Tarjetas</span>
             </button>
             <button
               onClick={() => setViewMode("list")}
-              className={`px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 text-sm font-medium transition-colors duration-200 flex items-center justify-center sm:justify-start ${
                 viewMode === "list"
                   ? "bg-black text-white"
                   : "bg-white text-gray-700 hover:bg-gray-50"
               }`}
+              aria-label="Vista de lista"
             >
               <svg
-                className="w-4 h-4 inline-block mr-2"
+                className="w-5 h-5 sm:mr-2"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -185,7 +187,7 @@ const RoadmapCoursesPage = () => {
                   d="M4 6h16M4 10h16M4 14h16M4 18h16"
                 />
               </svg>
-              Lista
+              <span className="hidden sm:inline">Lista</span>
             </button>
           </div>
         </div>

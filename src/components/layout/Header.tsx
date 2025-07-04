@@ -96,6 +96,16 @@ const Header = () => {
           >
             Rutas de aprendizaje
           </Link>
+          {!isAuthenticated && (
+            <Link
+              to="/login"
+              className="hidden md:inline-block bg-black text-white font-bold rounded px-6 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition w-auto text-center"
+              aria-label="Iniciar sesión"
+              tabIndex={0}
+            >
+              Iniciar sesión
+            </Link>
+          )}
           {isAuthenticated && (
             <>
               <span
@@ -140,6 +150,17 @@ const Header = () => {
             </>
           )}
         </nav>
+        {/* Botón móvil */}
+        {!isAuthenticated && (
+          <Link
+            to="/login"
+            className="md:hidden w-full block bg-black text-white font-bold rounded px-6 py-3 text-base focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition text-center mt-2"
+            aria-label="Iniciar sesión"
+            tabIndex={0}
+          >
+            Iniciar sesión
+          </Link>
+        )}
         {/* Burger menu solo en móvil */}
         <button
           className="md:hidden p-2 focus:outline-none"

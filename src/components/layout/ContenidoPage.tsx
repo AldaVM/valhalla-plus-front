@@ -178,7 +178,7 @@ const ContenidoPage: React.FC = () => {
             <button
               onClick={() =>
                 handleSliderScroll(
-                  roadmapsSliderRef,
+                  roadmapsSliderRef as React.RefObject<HTMLDivElement>,
                   "left",
                   setRoadmapsHasScrolled,
                   setRoadmapsAtEnd
@@ -207,7 +207,7 @@ const ContenidoPage: React.FC = () => {
             <button
               onClick={() =>
                 handleSliderScroll(
-                  roadmapsSliderRef,
+                  roadmapsSliderRef as React.RefObject<HTMLDivElement>,
                   "right",
                   setRoadmapsHasScrolled,
                   setRoadmapsAtEnd
@@ -236,7 +236,7 @@ const ContenidoPage: React.FC = () => {
             className={sliderClass}
             onScroll={() =>
               handleSliderManualScroll(
-                roadmapsSliderRef,
+                roadmapsSliderRef as React.RefObject<HTMLDivElement>,
                 setRoadmapsHasScrolled,
                 setRoadmapsAtEnd
               )
@@ -277,7 +277,7 @@ const ContenidoPage: React.FC = () => {
               <button
                 onClick={() =>
                   handleSliderScroll(
-                    giSliderRef,
+                    giSliderRef as React.RefObject<HTMLDivElement>,
                     "left",
                     setGiHasScrolled,
                     setGiAtEnd
@@ -306,7 +306,7 @@ const ContenidoPage: React.FC = () => {
               <button
                 onClick={() =>
                   handleSliderScroll(
-                    giSliderRef,
+                    giSliderRef as React.RefObject<HTMLDivElement>,
                     "right",
                     setGiHasScrolled,
                     setGiAtEnd
@@ -335,7 +335,7 @@ const ContenidoPage: React.FC = () => {
               className={sliderClass}
               onScroll={() =>
                 handleSliderManualScroll(
-                  giSliderRef,
+                  giSliderRef as React.RefObject<HTMLDivElement>,
                   setGiHasScrolled,
                   setGiAtEnd
                 )
@@ -394,7 +394,7 @@ const ContenidoPage: React.FC = () => {
                 <button
                   onClick={() =>
                     handleSliderScroll(
-                      nogiSliderRef,
+                      nogiSliderRef as React.RefObject<HTMLDivElement>,
                       "left",
                       setNogiHasScrolled,
                       setNogiAtEnd
@@ -423,7 +423,7 @@ const ContenidoPage: React.FC = () => {
               <button
                 onClick={() =>
                   handleSliderScroll(
-                    nogiSliderRef,
+                    nogiSliderRef as React.RefObject<HTMLDivElement>,
                     "right",
                     setNogiHasScrolled,
                     setNogiAtEnd
@@ -452,7 +452,7 @@ const ContenidoPage: React.FC = () => {
               className={sliderClass}
               onScroll={() =>
                 handleSliderManualScroll(
-                  nogiSliderRef,
+                  nogiSliderRef as React.RefObject<HTMLDivElement>,
                   setNogiHasScrolled,
                   setNogiAtEnd
                 )

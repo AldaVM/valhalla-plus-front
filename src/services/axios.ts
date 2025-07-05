@@ -40,15 +40,15 @@ api.interceptors.response.use(
         window.location.href = "/login";
       }
     }
-    
+
     // Para errores 409 (Conflict) - sesión duplicada, no redirigir automáticamente
     if (error.response?.status === 409) {
       // Dejar que el componente maneje este error específicamente
       return Promise.reject(error);
     }
-    
+
     return Promise.reject(error);
   }
 );
 
-export default api; 
+export default api;

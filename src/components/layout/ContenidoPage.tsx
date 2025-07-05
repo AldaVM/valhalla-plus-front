@@ -176,34 +176,77 @@ const ContenidoPage: React.FC = () => {
           {/* Flecha izquierda solo si no está al inicio */}
           {roadmaps.length > 0 && roadmapsHasScrolled && (
             <button
-              onClick={() => handleSliderScroll(roadmapsSliderRef, "left", setRoadmapsHasScrolled, setRoadmapsAtEnd)}
+              onClick={() =>
+                handleSliderScroll(
+                  roadmapsSliderRef,
+                  "left",
+                  setRoadmapsHasScrolled,
+                  setRoadmapsAtEnd
+                )
+              }
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-black hover:text-white text-black rounded-full p-2 shadow transition-colors"
               aria-label="Anterior roadmap"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
           )}
           {/* Flecha derecha solo si no está al final */}
           {roadmaps.length > 0 && !roadmapsAtEnd && (
             <button
-              onClick={() => handleSliderScroll(roadmapsSliderRef, "right", setRoadmapsHasScrolled, setRoadmapsAtEnd)}
+              onClick={() =>
+                handleSliderScroll(
+                  roadmapsSliderRef,
+                  "right",
+                  setRoadmapsHasScrolled,
+                  setRoadmapsAtEnd
+                )
+              }
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-80 hover:bg-black hover:text-white text-black rounded-full p-2 shadow transition-colors"
               aria-label="Siguiente roadmap"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           )}
           <div
             ref={roadmapsSliderRef}
             className={sliderClass}
-            onScroll={() => handleSliderManualScroll(roadmapsSliderRef, setRoadmapsHasScrolled, setRoadmapsAtEnd)}
+            onScroll={() =>
+              handleSliderManualScroll(
+                roadmapsSliderRef,
+                setRoadmapsHasScrolled,
+                setRoadmapsAtEnd
+              )
+            }
           >
             {roadmaps.slice(0, 20).map((roadmap: any) => (
-              <div key={roadmap.id} className="snap-center min-w-[90vw] sm:min-w-[260px] max-w-xs flex-shrink-0 h-[400px]">
+              <div
+                key={roadmap.id}
+                className="snap-center min-w-[90vw] sm:min-w-[260px] max-w-xs flex-shrink-0 h-[400px]"
+              >
                 <RoadmapCard roadmap={roadmap} className="h-full" />
               </div>
             ))}

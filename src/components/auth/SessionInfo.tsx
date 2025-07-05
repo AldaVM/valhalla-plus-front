@@ -55,6 +55,14 @@ const SessionInfo = ({ isOpen, onClose }: SessionInfoProps) => {
               "LIMPIAR SESIONES" para eliminar completamente todas las sesiones.
             </p>
           </div>
+
+          <div className="p-3 bg-orange-50 border border-orange-200 rounded">
+            <h4 className="font-medium text-orange-800 mb-2">Protección contra ataques de fuerza bruta</h4>
+            <p className="text-xs text-orange-700">
+              Por seguridad, tu cuenta se bloqueará temporalmente después de múltiples intentos fallidos de inicio de sesión. 
+              El bloqueo se resolverá automáticamente después de un tiempo determinado.
+            </p>
+          </div>
         </div>
 
         <div className="mt-6">

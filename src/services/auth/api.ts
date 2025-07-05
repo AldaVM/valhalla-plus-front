@@ -8,6 +8,12 @@ export async function loginApi(email: string, password: string) {
   return response.data;
 }
 
+// Nuevo endpoint para obtener el estado de la cuenta
+export async function getAccountStatusApi(email: string) {
+  const response = await api.get(`/login-attempts/account-status/${email}`);
+  return response.data;
+}
+
 export async function validateCredentialsApi(email: string, password: string) {
   const response = await api.post("/auth/validate-credentials", {
     email,

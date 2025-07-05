@@ -71,9 +71,6 @@ export async function getCoursesByUniformIdApi(
     params.positionId = positionId;
   }
 
-  console.log("API Call - URL:", `/courses/uniform/${uniformId}`);
-  console.log("API Call - Params:", params);
-
   const response = await api.get(`/courses/uniform/${uniformId}`, {
     params,
   });

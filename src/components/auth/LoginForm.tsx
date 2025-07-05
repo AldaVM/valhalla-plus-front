@@ -3,8 +3,14 @@ import * as yup from "yup";
 import { useState } from "react";
 import useAuth from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import { loginApi, getActiveSessionsByEmailApi } from "../../services/auth/api";
+import {
+  loginApi,
+  getActiveSessionsByEmailApi,
+  getAccountStatusApi,
+} from "../../services/auth/api";
 import ActiveSessionsModal from "./ActiveSessionsModal";
+import AccountBlockedModal from "./AccountBlockedModal";
+import LoginAttemptsWarning from "./LoginAttemptsWarning";
 
 function LoginForm() {
   const {
@@ -17,6 +23,13 @@ function LoginForm() {
 
   const [error, setError] = useState("");
   const [showSessionsModal, setShowSessionsModal] = useState(false);
+  const [showBlockedModal, setShowBlockedModal] = useState(false);
+  const [blockedEmail, setBlockedEmail] = useState("");
+  const [remainingAttempts, setRemainingAttempts] = useState<number | null>(
+    null
+  );
+  const [maxAttempts, setMaxAttempts] = useState<number>(3);
+  const [failedAttempts, setFailedAttempts] = useState<number>(0);
   const [loginCredentials, setLoginCredentials] = useState<{
     email: string;
     password: string;
@@ -39,10 +52,24 @@ function LoginForm() {
     try {
       const response = await loginApi(values.email, values.password);
       login(response.access_token, response.user);
-      navigate("/roadmaps");
+      navigate("/contenido");
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message || "Credenciales incorrectas";
+
+      // Verificar si es un error de cuenta bloqueada
+      if (
+        errorMessage.includes("Account is blocked") ||
+        errorMessage.includes("cuenta bloqueada") ||
+        errorMessage.includes("permanently blocked")
+      ) {
+        setBlockedEmail(values.email);
+        setShowBlockedModal(true);
+        setError("Cuenta bloqueada permanentemente");
+        setRemainingAttempts(null); // Limpia advertencias
+        setFailedAttempts(0);
+        return;
+      }
 
       // Verificar si es un error de límite de sesiones
       if (
@@ -69,7 +96,18 @@ function LoginForm() {
           setError("Error al cargar las sesiones activas");
         }
       } else {
-        setError(errorMessage);
+        // Verificar si el mensaje contiene información sobre intentos restantes
+        const attemptsMatch = errorMessage.match(/(\d+) attempts remaining/);
+        if (attemptsMatch) {
+          const attempts = parseInt(attemptsMatch[1]);
+          setRemainingAttempts(attempts);
+          setFailedAttempts(maxAttempts - attempts);
+          setError(
+            `Credenciales incorrectas. ${attempts} intentos restantes antes del bloqueo.`
+          );
+        } else {
+          setError(errorMessage);
+        }
       }
     }
   };
@@ -79,6 +117,12 @@ function LoginForm() {
     setSessionLimitError(null);
     setError("");
     setLoginCredentials(null);
+  };
+
+  const handleCloseBlockedModal = () => {
+    setShowBlockedModal(false);
+    setBlockedEmail("");
+    setError("");
   };
 
   const handleRetryLogin = async () => {
@@ -161,6 +205,17 @@ function LoginForm() {
                 />
               </div>
 
+              {/* Warning for remaining attempts */}
+              {remainingAttempts !== null &&
+                !showBlockedModal &&
+                remainingAttempts < maxAttempts && (
+                  <LoginAttemptsWarning
+                    remainingAttempts={remainingAttempts}
+                    maxAttempts={maxAttempts}
+                    failedAttempts={failedAttempts}
+                  />
+                )}
+
               {/* Error Message */}
               {error && (
                 <div className="text-xs text-red-600 font-light text-center">
@@ -197,6 +252,15 @@ function LoginForm() {
           isLoginContext={true}
           onRetryLogin={handleRetryLogin}
           loginCredentials={loginCredentials}
+        />
+      )}
+
+      {/* Modal de Cuenta Bloqueada */}
+      {showBlockedModal && (
+        <AccountBlockedModal
+          isOpen={showBlockedModal}
+          onClose={handleCloseBlockedModal}
+          email={blockedEmail}
         />
       )}
     </div>

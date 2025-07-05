@@ -13,7 +13,6 @@ const PAGE_SIZE = 20;
 
 const ContenidoPage: React.FC = () => {
   const [roadmaps, setRoadmaps] = useState<any[]>([]);
-  const [uniforms, setUniforms] = useState<Uniform[]>([]);
   const [gi, setGi] = useState<Uniform | null>(null);
   const [nogi, setNogi] = useState<Uniform | null>(null);
   const [giCourses, setGiCourses] = useState<PaginatedCoursesResponse | null>(
@@ -46,7 +45,6 @@ const ContenidoPage: React.FC = () => {
           getUniformsApi(),
         ]);
         setRoadmaps(roadmapsData);
-        setUniforms(uniformsData);
         // Buscar NOGI primero
         const nogiUniform = uniformsData.find((u) =>
           u.name.toLowerCase().includes("nogi")

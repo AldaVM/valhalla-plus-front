@@ -101,12 +101,6 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
     }
   };
 
-  const handleClearFilters = () => {
-    setSelectedAuthor("");
-    setSelectedPosition("");
-    handleLoadCourses(1);
-  };
-
   // Cargar cursos cuando cambie el uniformId
   useEffect(() => {
     if (uniformId) {

@@ -6,9 +6,19 @@ interface CourseCardProps {
   course: Course;
   orderInRoadmap?: number;
   roadmapId?: string;
+  linkTo?: string;
+  linkState?: any;
+  className?: string;
 }
 
-function CourseCard({ course, orderInRoadmap, roadmapId }: CourseCardProps) {
+function CourseCard({
+  course,
+  orderInRoadmap,
+  roadmapId,
+  linkTo,
+  linkState,
+  className,
+}: CourseCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggleDescription = () => {
@@ -16,12 +26,17 @@ function CourseCard({ course, orderInRoadmap, roadmapId }: CourseCardProps) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group">
+    <div
+      className={`bg-white border border-gray-200 overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group ${
+        className || ""
+      }`}
+    >
       <div className="relative w-full h-48 overflow-hidden">
         <img
           src={course.thumbnailUrl}
           alt={course.title}
           className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
         />
         {/* Badge de orden en el roadmap */}
         {orderInRoadmap && (
@@ -40,7 +55,7 @@ function CourseCard({ course, orderInRoadmap, roadmapId }: CourseCardProps) {
         )}
       </div>
       <div className="p-4 flex-1 flex flex-col justify-between">
-        <h2 className="text-lg font-medium text-black mb-2 uppercase tracking-wide transition-colors duration-300 ease-out group-hover:text-gray-800">
+        <h2 className="text-lg font-medium text-black mb-2 uppercase tracking-wide transition-colors duration-300 ease-out group-hover:text-gray-800 line-clamp-2">
           {course.title}
         </h2>
         {course.author?.name && (
@@ -82,8 +97,8 @@ function CourseCard({ course, orderInRoadmap, roadmapId }: CourseCardProps) {
           </div>
         )}
         <Link
-          to={`/courses/${course.id}`}
-          state={{ roadmapId, courseId: course.id }}
+          to={linkTo || `/courses/${course.id}`}
+          state={linkState || { roadmapId, courseId: course.id }}
           className="inline-block mt-auto text-xs font-medium text-black hover:underline tracking-wide transition-all duration-300 ease-out transform hover:translate-x-1 hover:text-gray-700"
           aria-label={`Ver curso ${course.title}`}
         >

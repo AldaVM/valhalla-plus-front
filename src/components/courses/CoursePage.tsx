@@ -170,24 +170,50 @@ function CoursePage() {
           <button
             disabled={!previous}
             onClick={() => handleNavigate("previous")}
-            className={`px-4 py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
+            className={`p-2 sm:px-4 sm:py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
               !previous
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-black hover:text-white"
             }`}
+            aria-label="Curso anterior"
           >
-            Anterior
+            <svg
+              className="w-5 h-5 sm:w-4 sm:h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
           </button>
           <button
             disabled={!next}
             onClick={() => handleNavigate("next")}
-            className={`px-4 py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
+            className={`p-2 sm:px-4 sm:py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
               !next
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-black hover:text-white"
             }`}
+            aria-label="Curso siguiente"
           >
-            Siguiente
+            <svg
+              className="w-5 h-5 sm:w-4 sm:h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </button>
         </div>
       </div>

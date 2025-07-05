@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function RoadmapCard({ roadmap }: { roadmap: any }) {
+interface RoadmapCardProps {
+  roadmap: any;
+  className?: string;
+}
+
+function RoadmapCard({ roadmap, className }: RoadmapCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggleDescription = () => {
@@ -9,12 +14,17 @@ function RoadmapCard({ roadmap }: { roadmap: any }) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group">
+    <div
+      className={`bg-white border border-gray-200 overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group ${
+        className || ""
+      }`}
+    >
       <div className="relative w-full h-48 overflow-hidden">
         <img
           src={roadmap.thumbnailUrl}
           alt={roadmap.title}
           className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
         />
         {roadmap.courses && roadmap.courses.length > 0 && (
           <span className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 font-medium tracking-wide transition-all duration-300 ease-out transform group-hover:scale-110 group-hover:bg-opacity-90">
@@ -31,13 +41,17 @@ function RoadmapCard({ roadmap }: { roadmap: any }) {
           <div className="mb-4">
             {isExpanded && (
               <div className="mb-2">
-                <p className="text-sm text-gray-600 leading-relaxed">{roadmap.description}</p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {roadmap.description}
+                </p>
               </div>
             )}
             <button
               onClick={handleToggleDescription}
               className="text-xs text-gray-500 hover:text-black font-medium tracking-wide transition-colors duration-200"
-              aria-label={isExpanded ? "Ocultar información" : "Leer información"}
+              aria-label={
+                isExpanded ? "Ocultar información" : "Leer información"
+              }
             >
               {isExpanded ? "Ocultar información" : "Leer información"}
             </button>

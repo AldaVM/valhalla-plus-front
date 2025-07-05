@@ -81,13 +81,23 @@ const Header = () => {
 
   return (
     <header className="w-full sticky top-0 z-50 bg-white border-b border-black">
-      <div className="w-full px-6 py-4 flex items-center justify-between">
+      <div className="w-full px-4 md:px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <h1 className="text-xl font-bold tracking-wide text-black focus:outline-none">
           VALHALLA JIU JITSU +
         </h1>
         {/* Opciones desktop/tablet */}
         <nav className="hidden md:flex items-center space-x-8">
+          {isAuthenticated && (
+            <Link
+              to="/contenido"
+              className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
+              aria-label="Contenido"
+              tabIndex={0}
+            >
+              Contenido
+            </Link>
+          )}
           <Link
             to="/roadmaps"
             className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
@@ -95,6 +105,14 @@ const Header = () => {
             tabIndex={0}
           >
             Rutas de aprendizaje
+          </Link>
+          <Link
+            to="/uniforms"
+            className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
+            aria-label="Uniformes"
+            tabIndex={0}
+          >
+            GI / NOGI
           </Link>
           {!isAuthenticated && (
             <Link
@@ -238,6 +256,15 @@ const Header = () => {
               onClick={() => setShowDrawer(false)}
             >
               Rutas de aprendizaje
+            </Link>
+            <Link
+              to="/uniforms"
+              className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+              aria-label="Uniformes"
+              tabIndex={0}
+              onClick={() => setShowDrawer(false)}
+            >
+              GI / NOGI
             </Link>
             {isAuthenticated && (
               <>

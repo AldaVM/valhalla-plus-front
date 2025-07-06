@@ -176,9 +176,9 @@ const ActiveSessionsModal = ({
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+        <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto border border-gray-200 dark:border-gray-700 transition-colors">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-light tracking-wide text-black">
+            <h3 className="text-lg font-light tracking-wide text-black dark:text-white">
               {isLoginContext
                 ? "Límite de Sesiones Alcanzado"
                 : "Sesiones Activas"}
@@ -186,7 +186,7 @@ const ActiveSessionsModal = ({
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowHelpModal(true)}
-                className="text-gray-400 hover:text-black transition-colors"
+                className="text-gray-400 hover:text-black dark:hover:text-white dark:text-gray-300 transition-colors"
                 aria-label="Ayuda"
               >
                 <svg
@@ -205,7 +205,7 @@ const ActiveSessionsModal = ({
               </button>
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-black transition-colors"
+                className="text-gray-400 hover:text-black dark:hover:text-white dark:text-gray-300 transition-colors"
                 aria-label="Cerrar"
               >
                 <svg
@@ -227,12 +227,12 @@ const ActiveSessionsModal = ({
 
           {/* Mensaje de error de límite de sesiones */}
           {isLoginContext && sessionLimitError && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded">
-              <p className="text-sm text-red-600 font-medium mb-2">
+            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded">
+              <p className="text-sm text-red-600 dark:text-red-300 font-medium mb-2">
                 No puedes iniciar sesión
               </p>
-              <p className="text-sm text-red-600">{sessionLimitError}</p>
-              <p className="text-sm text-red-600 mt-2">
+              <p className="text-sm text-red-600 dark:text-red-300">{sessionLimitError}</p>
+              <p className="text-sm text-red-600 dark:text-red-300 mt-2">
                 Cierra una sesión existente para poder iniciar sesión
                 en este dispositivo.
               </p>
@@ -241,29 +241,29 @@ const ActiveSessionsModal = ({
 
           {loading && (
             <div className="text-center py-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-2"></div>
-              <p className="text-sm font-light text-gray-600">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black dark:border-white mx-auto mb-2"></div>
+              <p className="text-sm font-light text-gray-600 dark:text-gray-300">
                 Cargando sesiones...
               </p>
             </div>
           )}
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded">
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded">
+              <p className="text-sm text-red-600 dark:text-red-300">{error}</p>
             </div>
           )}
 
           {sessionsData && (
             <>
-              <div className="mb-4 p-3 border border-black rounded bg-white">
-                <p className="text-sm text-black">
+              <div className="mb-4 p-3 border border-black dark:border-gray-400 rounded bg-white dark:bg-gray-800">
+                <p className="text-sm text-black dark:text-white">
                   <strong>Sesiones activas:</strong>{" "}
                   {sessionsData.sessions.length} de{" "}
                   {sessionsData.maxTokensAllowed} permitidas
                 </p>
                 {isLoginContext && (
-                  <p className="text-sm text-black mt-1">
+                  <p className="text-sm text-black dark:text-white mt-1">
                     Debes cerrar al menos una sesión para poder iniciar sesión
                     aquí.
                   </p>
@@ -271,7 +271,7 @@ const ActiveSessionsModal = ({
               </div>
 
               {sessionsData.sessions.length === 0 ? (
-                <p className="text-sm text-gray-600 text-center py-4">
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-center py-4">
                   No hay sesiones activas
                 </p>
               ) : (
@@ -279,7 +279,7 @@ const ActiveSessionsModal = ({
                   {sessionsData.sessions.map((session) => (
                     <div
                       key={session.id}
-                      className="p-3 border border-black rounded bg-white hover:border-gray-400 transition-colors"
+                      className="p-3 border border-black dark:border-gray-400 rounded bg-white dark:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
@@ -287,21 +287,21 @@ const ActiveSessionsModal = ({
                             <span className="text-lg">
                               {getDeviceIcon(session.deviceInfo)}
                             </span>
-                            <p className="text-sm font-medium text-black">
+                            <p className="text-sm font-medium text-black dark:text-white">
                               {session.deviceInfo}
                             </p>
                           </div>
-                          <p className="text-xs text-gray-600 mt-1">
+                          <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
                             IP: {session.ipAddress}
                           </p>
-                          <p className="text-xs text-gray-600">
+                          <p className="text-xs text-gray-600 dark:text-gray-300">
                             Creada: {formatDate(session.createdAt)}
                           </p>
                         </div>
                         <button
                           onClick={() => handleCloseSession(session.id)}
                           disabled={closingSession === session.id}
-                          className="ml-3 px-3 py-1 text-xs bg-black text-white hover:bg-gray-800 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="ml-3 px-3 py-1 text-xs bg-black text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                           aria-label={`Cerrar sesión ${session.deviceInfo}`}
                         >
                           {closingSession === session.id
@@ -316,17 +316,17 @@ const ActiveSessionsModal = ({
 
               {/* Botones de acción en contexto de login */}
               {isLoginContext && (
-                <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
                   <button
                     onClick={onClose}
-                    className="px-4 py-2 text-sm border border-gray-300 text-gray-700 hover:bg-gray-50 rounded transition-colors"
+                    className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-500 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 rounded transition-colors"
                   >
                     CANCELAR
                   </button>
                   {canRetryLogin && onRetryLogin && (
                     <button
                       onClick={handleRetryLogin}
-                      className="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded transition-colors"
+                      className="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded transition-colors"
                     >
                       REINTENTAR LOGIN
                     </button>

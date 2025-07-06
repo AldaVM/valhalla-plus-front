@@ -31,12 +31,12 @@ const LogoutConfirm = ({ isOpen, onClose }: LogoutConfirmProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
-        <h3 className="text-lg font-light tracking-wide text-black mb-4">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 border border-gray-200 dark:border-gray-700 transition-colors">
+        <h3 className="text-lg font-light tracking-wide text-black dark:text-white mb-4">
           Confirmar cierre de sesión
         </h3>
 
-        <p className="text-sm font-light text-gray-600 mb-6">
+        <p className="text-sm font-light text-gray-600 dark:text-gray-300 mb-6">
           ¿Estás seguro de que quieres cerrar sesión? Esta acción invalidará tu sesión actual.
         </p>
 
@@ -44,7 +44,7 @@ const LogoutConfirm = ({ isOpen, onClose }: LogoutConfirmProps) => {
           <button
             onClick={onClose}
             disabled={isLoggingOut}
-            className="flex-1 py-2 px-4 border border-black text-sm font-light tracking-wide hover:bg-gray-50 transition-colors disabled:opacity-50 bg-white text-black"
+            className="flex-1 py-2 px-4 border border-black dark:border-gray-400 text-sm font-light tracking-wide hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 bg-white dark:bg-gray-900 text-black dark:text-white"
             aria-label="Cancelar"
           >
             CANCELAR
@@ -52,7 +52,7 @@ const LogoutConfirm = ({ isOpen, onClose }: LogoutConfirmProps) => {
           <button
             onClick={handleConfirmLogout}
             disabled={isLoggingOut}
-            className="flex-1 py-2 px-4 bg-black text-white text-sm font-light tracking-wide hover:bg-gray-800 transition-colors disabled:opacity-50"
+            className="flex-1 py-2 px-4 bg-black text-white text-sm font-light tracking-wide hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
             aria-label="Confirmar cierre de sesión"
           >
             {isLoggingOut ? "CERRANDO..." : "CONFIRMAR"}

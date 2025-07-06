@@ -94,31 +94,31 @@ const SessionNotification = () => {
 
   return (
     <>
-      <div className={`fixed top-4 right-4 z-50 p-4 border rounded-lg shadow-lg max-w-sm ${getNotificationStyles()}`}>
+      <div className={`fixed top-4 right-4 z-50 p-4 border rounded-lg shadow-lg max-w-sm ${getNotificationStyles()} dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100`}>
         <div className="flex items-start">
           <div className="flex-shrink-0">
             {getNotificationIcon()}
           </div>
           <div className="ml-3 flex-1">
-            <h3 className="text-sm font-medium">
+            <h3 className="text-sm font-medium dark:text-white">
               Sesiones Activas
             </h3>
-            <p className="text-sm mt-1">
+            <p className="text-sm mt-1 dark:text-gray-200">
               {getNotificationMessage()}
             </p>
-            <p className="text-sm mt-1">
+            <p className="text-sm mt-1 dark:text-gray-300">
               Sesiones: {activeSessions.length}/{maxTokensAllowed}
             </p>
             <div className="mt-3 flex gap-2">
               <button
                 onClick={handleManageSessions}
-                className="text-sm font-medium underline hover:no-underline"
+                className="text-sm font-medium underline hover:no-underline dark:text-blue-400"
               >
                 Gestionar sesiones
               </button>
               <button
                 onClick={handleCloseNotification}
-                className="text-sm font-medium underline hover:no-underline"
+                className="text-sm font-medium underline hover:no-underline dark:text-blue-400"
               >
                 Cerrar
               </button>
@@ -126,7 +126,7 @@ const SessionNotification = () => {
           </div>
           <button
             onClick={handleCloseNotification}
-            className="ml-4 flex-shrink-0"
+            className="ml-4 flex-shrink-0 dark:text-gray-400 hover:dark:text-white"
             aria-label="Cerrar notificación"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

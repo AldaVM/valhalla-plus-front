@@ -9,7 +9,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   className = '', 
   size = 'md' 
 }) => {
-  const { theme, toggleTheme, isDark, allowThemeToggle } = useTheme();
+  const { toggleTheme, isDark, allowThemeToggle } = useTheme();
 
   // Don't render if theme toggle is not allowed
   if (!allowThemeToggle) {

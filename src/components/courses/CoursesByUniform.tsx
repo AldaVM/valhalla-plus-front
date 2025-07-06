@@ -26,12 +26,27 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
   const [positions, setPositions] = useState<Position[]>([]);
   const [loadingFilters, setLoadingFilters] = useState(false);
 
-  const handleLoadCourses = async (page: number = 1, authorId?: string | null, positionId?: string | null) => {
+  const handleLoadCourses = async (
+    page: number = 1,
+    authorId?: string | null,
+    positionId?: string | null
+  ) => {
     setLoading(true);
     setError(null);
     try {
-      console.log("Loading courses:", { uniformId, page, authorId, positionId });
-      const data = await getCoursesByUniformIdApi(uniformId, page, 12, authorId, positionId);
+      console.log("Loading courses:", {
+        uniformId,
+        page,
+        authorId,
+        positionId,
+      });
+      const data = await getCoursesByUniformIdApi(
+        uniformId,
+        page,
+        12,
+        authorId,
+        positionId
+      );
       setCoursesData(data);
       setCurrentPage(page);
     } catch (err) {
@@ -61,7 +76,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
   const handleSearch = async () => {
     setSearchLoading(true);
     setError(null);
-    
+
     const filters = {
       uniformId,
       authorId: selectedAuthor || null,
@@ -91,13 +106,21 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
 
   const handleNextPage = () => {
     if (coursesData?.meta.hasNextPage) {
-      handleLoadCourses(currentPage + 1, selectedAuthor || null, selectedPosition || null);
+      handleLoadCourses(
+        currentPage + 1,
+        selectedAuthor || null,
+        selectedPosition || null
+      );
     }
   };
 
   const handlePreviousPage = () => {
     if (coursesData?.meta.hasPreviousPage) {
-      handleLoadCourses(currentPage - 1, selectedAuthor || null, selectedPosition || null);
+      handleLoadCourses(
+        currentPage - 1,
+        selectedAuthor || null,
+        selectedPosition || null
+      );
     }
   };
 
@@ -117,8 +140,8 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando cursos...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Cargando cursos...</p>
         </div>
       </div>
     );
@@ -128,15 +151,25 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
     return (
       <div className="text-center py-12">
         <div className="max-w-md mx-auto">
-          <div className="text-red-600 mb-4">
-            <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+          <div className="text-red-600 dark:text-red-400 mb-4">
+            <svg
+              className="w-16 h-16 mx-auto mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              />
             </svg>
             <p className="text-lg font-medium">{error}</p>
           </div>
           <button
             onClick={() => handleLoadCourses(1)}
-            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+            className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium"
           >
             Reintentar
           </button>
@@ -148,13 +181,13 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
   return (
     <div className="space-y-8">
       {/* Filtros */}
-      <div className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 sm:p-4 transition-colors">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {/* Filtro de Autor */}
           <div className="flex flex-col">
             <label
               htmlFor="author-filter"
-              className="text-xs font-medium text-gray-700 mb-1"
+              className="text-xs font-medium text-gray-700 dark:text-gray-200 mb-1"
             >
               Autor
             </label>
@@ -162,7 +195,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
               id="author-filter"
               value={selectedAuthor}
               onChange={(e) => setSelectedAuthor(e.target.value)}
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black bg-white"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-black dark:focus:border-white bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors"
               disabled={loadingFilters}
             >
               <option value="">Todos</option>
@@ -178,7 +211,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
           <div className="flex flex-col">
             <label
               htmlFor="position-filter"
-              className="text-xs font-medium text-gray-700 mb-1"
+              className="text-xs font-medium text-gray-700 dark:text-gray-200 mb-1"
             >
               Posición
             </label>
@@ -186,7 +219,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
               id="position-filter"
               value={selectedPosition}
               onChange={(e) => setSelectedPosition(e.target.value)}
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black bg-white"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-black dark:focus:border-white bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors"
               disabled={loadingFilters}
             >
               <option value="">Todos</option>
@@ -203,7 +236,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
             <button
               onClick={handleSearch}
               disabled={loadingFilters || searchLoading}
-              className="w-full h-[2.25rem] bg-black text-white rounded text-sm hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center"
+              className="w-full h-[2.25rem] bg-black text-white px-4 py-2 rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center"
             >
               {searchLoading ? (
                 <div className="flex items-center justify-center">
@@ -220,11 +253,12 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
 
       {/* Información de paginación */}
       {coursesData && (
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 p-4 rounded-lg">
-          <div className="text-sm text-gray-600">
-            Mostrando {coursesData.courses.length} de {coursesData.meta.total} cursos
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 dark:bg-gray-800 p-4 rounded-lg transition-colors">
+          <div className="text-sm text-gray-600 dark:text-gray-300">
+            Mostrando {coursesData.courses.length} de {coursesData.meta.total}{" "}
+            cursos
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-gray-600 dark:text-gray-300">
             Página {coursesData.meta.page} de {coursesData.meta.totalPages}
           </div>
         </div>
@@ -241,7 +275,10 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
       ) : coursesData && coursesData.courses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-6">
           {coursesData.courses.map((course) => (
-            <div key={course.id} className="snap-center min-w-[90vw] sm:min-w-0 h-[400px]">
+            <div
+              key={course.id}
+              className="snap-center min-w-[90vw] sm:min-w-0 h-[400px]"
+            >
               <CourseCard
                 course={course}
                 linkTo={`/uniforms/${uniformId}/courses/${course.id}`}
@@ -254,15 +291,26 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
       ) : coursesData && coursesData.courses.length === 0 ? (
         <div className="text-center py-16">
           <div className="max-w-md mx-auto">
-            <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
+            <svg
+              className="w-16 h-16 mx-auto mb-4 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"
+              />
             </svg>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No se encontraron cursos</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              No se encontraron cursos
+            </h3>
             <p className="text-gray-600 mb-6">
-              {selectedAuthor || selectedPosition 
+              {selectedAuthor || selectedPosition
                 ? "No hay cursos que coincidan con los filtros seleccionados."
-                : "No hay cursos disponibles en este uniforme."
-              }
+                : "No hay cursos disponibles en este uniforme."}
             </p>
           </div>
         </div>
@@ -274,7 +322,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
           <button
             onClick={handlePreviousPage}
             disabled={!coursesData.meta.hasPreviousPage || loading}
-            className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Página anterior"
           >
             <svg
@@ -292,17 +340,17 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
             </svg>
             Anterior
           </button>
-          
+
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-300">
               Página {coursesData.meta.page} de {coursesData.meta.totalPages}
             </span>
           </div>
-          
+
           <button
             onClick={handleNextPage}
             disabled={!coursesData.meta.hasNextPage || loading}
-            className="flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Página siguiente"
           >
             Siguiente
@@ -326,7 +374,7 @@ const CoursesByUniform: React.FC<CoursesByUniformProps> = ({ uniformId }) => {
       {/* Loading indicator para paginación */}
       {loading && coursesData && (
         <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black dark:border-white"></div>
         </div>
       )}
     </div>

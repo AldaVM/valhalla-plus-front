@@ -69,10 +69,10 @@ function CoursePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white dark:bg-gray-900 flex items-center justify-center transition-colors">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando curso...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Cargando curso...</p>
         </div>
       </div>
     );
@@ -80,9 +80,9 @@ function CoursePage() {
 
   if (error || !data.course) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white dark:bg-gray-900 flex items-center justify-center transition-colors">
         <div className="text-center">
-          <p className="text-red-600 mb-4">
+          <p className="text-red-600 dark:text-red-400 mb-4">
             {error || "No se encontró el curso"}
           </p>
         </div>
@@ -101,7 +101,7 @@ function CoursePage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 transition-colors">
       <div className="max-w-4xl mx-auto py-4">
         {roadmap && (
           <div className="mb-2 text-xs text-gray-500 uppercase tracking-wider">
@@ -114,10 +114,10 @@ function CoursePage() {
             </Link>
           </div>
         )}
-        <h1 className="text-3xl font-medium text-black mb-2 uppercase tracking-wide">
+        <h1 className="text-3xl font-medium text-black dark:text-white mb-2 uppercase tracking-wide">
           {course?.course.title}
         </h1>
-        <div className="mb-4 text-sm text-gray-700">
+        <div className="mb-4 text-sm text-gray-700 dark:text-gray-300">
           <span className="font-medium">Duración:</span>{" "}
           {course?.course.duration !== undefined &&
             formatDuration(course.course.duration)}
@@ -162,7 +162,7 @@ function CoursePage() {
           )}
         </div>
         <div className="mb-8">
-          <p className="text-gray-600 mb-8 max-w-3xl leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-3xl leading-relaxed">
             {course?.course.description}
           </p>
         </div>
@@ -170,11 +170,7 @@ function CoursePage() {
           <button
             disabled={!previous}
             onClick={() => handleNavigate("previous")}
-            className={`p-2 sm:px-4 sm:py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
-              !previous
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-black hover:text-white"
-            }`}
+            className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Curso anterior"
           >
             <svg
@@ -190,17 +186,15 @@ function CoursePage() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
+            <span className="text-sm font-medium hidden sm:inline">Anterior</span>
           </button>
           <button
             disabled={!next}
             onClick={() => handleNavigate("next")}
-            className={`p-2 sm:px-4 sm:py-2 border border-gray-300 text-black font-medium transition-colors duration-200 ${
-              !next
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-black hover:text-white"
-            }`}
+            className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Curso siguiente"
           >
+            <span className="text-sm font-medium hidden sm:inline">Siguiente</span>
             <svg
               className="w-5 h-5 sm:w-4 sm:h-4"
               fill="none"

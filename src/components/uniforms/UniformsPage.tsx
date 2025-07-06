@@ -26,16 +26,16 @@ const UniformsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 transition-colors">
       <Helmet>
         <title>Valhalla Jiu Jitsu + | Uniformes</title>
       </Helmet>
       <div className="w-full py-8">
         <div className="mb-8 w-full">
-          <h1 className="text-3xl font-medium text-black mb-4 uppercase tracking-wide w-full">
+          <h1 className="text-3xl font-medium text-black dark:text-white mb-4 uppercase tracking-wide w-full">
             Uniformes
           </h1>
-          <p className="text-gray-600 max-w-2xl w-full">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl w-full">
             Técnicas con GI y sin GI y descubre técnicas específicas para cada estilo de Jiu Jitsu
           </p>
         </div>
@@ -43,14 +43,14 @@ const UniformsPage: React.FC = () => {
         {isLoading ? (
           <div className="flex justify-center items-center py-24 w-full">
             <div className="text-center w-full">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-              <p className="text-gray-600">Cargando uniformes...</p>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-300">Cargando uniformes...</p>
             </div>
           </div>
         ) : error ? (
           <div className="flex justify-center items-center py-24 w-full">
             <div className="text-center w-full">
-              <div className="text-red-600 mb-4">
+              <div className="text-red-600 dark:text-red-400 mb-4">
                 <svg
                   className="w-12 h-12 mx-auto mb-2"
                   fill="none"
@@ -65,10 +65,10 @@ const UniformsPage: React.FC = () => {
                   />
                 </svg>
               </div>
-              <p className="text-gray-600 mb-4">{error}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition-colors"
+                className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
               >
                 Reintentar
               </button>
@@ -77,7 +77,7 @@ const UniformsPage: React.FC = () => {
         ) : uniforms.length === 0 ? (
           <div className="flex justify-center items-center py-24 w-full">
             <div className="text-center w-full">
-              <div className="text-gray-400 mb-4">
+              <div className="text-gray-400 dark:text-gray-500 mb-4">
                 <svg
                   className="w-12 h-12 mx-auto mb-2"
                   fill="none"
@@ -92,7 +92,7 @@ const UniformsPage: React.FC = () => {
                   />
                 </svg>
               </div>
-              <p className="text-gray-600">No se encontraron uniformes disponibles.</p>
+              <p className="text-gray-600 dark:text-gray-300">No se encontraron uniformes disponibles.</p>
             </div>
           </div>
         ) : (

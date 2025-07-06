@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import LoginForm from "./components/auth/LoginForm";
 import RoadmapsPage from "./components/roadmaps/RoadmapsPage";
@@ -13,11 +13,40 @@ import PrivacyPage from "./components/layout/PrivacyPage";
 import HomePage from "./components/layout/HomePage";
 import UniformCourseDetailPage from "./components/uniforms/UniformCourseDetailPage";
 import ContenidoPage from "./components/layout/ContenidoPage";
+import { useTheme } from "./context/ThemeContext";
+import { useEffect } from "react";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/*" element={<AppRoutes />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+// Component to handle theme based on routes
+function AppRoutes() {
+  const location = useLocation();
+  const { forceLightTheme, setAllowThemeToggle } = useTheme();
+
+  useEffect(() => {
+    // Public routes that should always be light theme
+    const publicRoutes = ['/', '/login', '/terms', '/privacy'];
+    const isPublicRoute = publicRoutes.includes(location.pathname);
+
+    if (isPublicRoute) {
+      forceLightTheme();
+      setAllowThemeToggle(false);
+    } else {
+      // Protected routes can use theme toggle
+      setAllowThemeToggle(true);
+    }
+  }, [location.pathname, forceLightTheme, setAllowThemeToggle]);
+
+  return (
+    <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route
@@ -108,6 +137,5 @@ export default function Router() {
         />
         <Route path="*" element={<NotFoundPage />} /> {/* fallback 404 */}
       </Routes>
-    </BrowserRouter>
-  );
+    );
 }

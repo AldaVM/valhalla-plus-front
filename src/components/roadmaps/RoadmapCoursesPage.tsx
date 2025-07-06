@@ -63,10 +63,10 @@ const RoadmapCoursesPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white dark:bg-gray-900 flex items-center justify-center transition-colors">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando cursos...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Cargando cursos...</p>
         </div>
       </div>
     );
@@ -74,19 +74,19 @@ const RoadmapCoursesPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white dark:bg-gray-900 flex items-center justify-center transition-colors">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
           {/* Debug: mostrar respuesta raw si hay error */}
           {rawResponse && (
-            <div className="mt-4 p-4 bg-gray-100 rounded text-left max-w-2xl overflow-auto">
+            <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded text-left max-w-2xl overflow-auto">
               <h3 className="font-bold mb-2">Debug - Respuesta del servidor:</h3>
-              <pre className="text-xs">{JSON.stringify(rawResponse, null, 2)}</pre>
+              <pre className="text-xs text-gray-700 dark:text-gray-200">{JSON.stringify(rawResponse, null, 2)}</pre>
             </div>
           )}
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-black text-white font-medium hover:bg-gray-800 transition-colors duration-200 mt-4"
+            className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 mt-4"
           >
             Reintentar
           </button>
@@ -97,16 +97,16 @@ const RoadmapCoursesPage = () => {
 
   if (!coursesData || coursesData.courses.length === 0) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-white dark:bg-gray-900 flex items-center justify-center transition-colors">
         <div className="text-center">
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
             No se encontraron cursos en este roadmap
           </p>
           {/* Debug: mostrar respuesta raw si no hay cursos */}
           {rawResponse && (
-            <div className="mt-4 p-4 bg-gray-100 rounded text-left max-w-2xl overflow-auto">
+            <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded text-left max-w-2xl overflow-auto">
               <h3 className="font-bold mb-2">Debug - Respuesta del servidor:</h3>
-              <pre className="text-xs">{JSON.stringify(rawResponse, null, 2)}</pre>
+              <pre className="text-xs text-gray-700 dark:text-gray-200">{JSON.stringify(rawResponse, null, 2)}</pre>
             </div>
           )}
         </div>
@@ -115,17 +115,17 @@ const RoadmapCoursesPage = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 transition-colors">
       <div className="w-full py-8">
         {/* Header */}
         <div className="mb-8 w-full">
-          <h1 className="text-3xl font-medium text-black mb-4 uppercase tracking-wide w-full">
+          <h1 className="text-3xl font-medium text-black dark:text-white mb-4 uppercase tracking-wide w-full">
             {roadmapTitle || "Cursos del Roadmap"}
           </h1>
           {roadmapDescription && (
-            <p className="text-gray-600 mb-4 w-full">{roadmapDescription}</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-4 w-full">{roadmapDescription}</p>
           )}
-          <p className="text-gray-600 w-full">
+          <p className="text-gray-600 dark:text-gray-300 w-full">
             {coursesData.totalCourses} curso{coursesData.totalCourses !== 1 ? "s" : ""} disponible
             {coursesData.totalCourses !== 1 ? "s" : ""}
             {coursesData.totalDuration > 0 && (
@@ -140,13 +140,13 @@ const RoadmapCoursesPage = () => {
         </div>
         {/* Toggle de vista */}
         <div className="mb-6 flex justify-end w-full">
-          <div className="flex border border-gray-300">
+          <div className="flex border border-gray-300 dark:border-gray-600">
             <button
               onClick={() => setViewMode("cards")}
               className={`px-4 py-2 text-sm font-medium transition-colors duration-200 flex items-center justify-center sm:justify-start ${
                 viewMode === "cards"
-                  ? "bg-black text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  ? "bg-black dark:bg-white text-white dark:text-black"
+                  : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
               aria-label="Vista de tarjetas"
             >
@@ -169,8 +169,8 @@ const RoadmapCoursesPage = () => {
               onClick={() => setViewMode("list")}
               className={`px-4 py-2 text-sm font-medium transition-colors duration-200 flex items-center justify-center sm:justify-start ${
                 viewMode === "list"
-                  ? "bg-black text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50"
+                  ? "bg-black dark:bg-white text-white dark:text-black"
+                  : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
               aria-label="Vista de lista"
             >

@@ -31,24 +31,24 @@ function RoadmapsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 transition-colors">
       <Helmet>
         <title>Valhalla Jiu Jitsu + | Rutas de aprendizaje</title>
       </Helmet>
       <div className="w-full py-8">
         <div className="mb-8 w-full">
-          <h1 className="text-3xl font-medium text-black mb-4 uppercase tracking-wide w-full">
+          <h1 className="text-3xl font-medium text-black dark:text-white mb-4 uppercase tracking-wide w-full">
             Rutas de aprendizaje
           </h1>
-          <p className="text-gray-600 max-w-2xl w-full">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl w-full">
             Explora nuestras rutas de aprendizaje diseñadas para tu progreso en Jiu Jitsu
           </p>
         </div>
         {isLoading ? (
           <div className="flex justify-center items-center py-24 w-full">
             <div className="text-center w-full">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-              <p className="text-gray-600">Cargando rutas de aprendizaje...</p>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-300">Cargando rutas de aprendizaje...</p>
             </div>
           </div>
         ) : (

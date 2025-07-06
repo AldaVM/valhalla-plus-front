@@ -45,7 +45,7 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
   }, [uniform.id]);
 
   return (
-    <div className="bg-white border border-gray-200 overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group h-full">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-lg group h-full">
       <div className="relative w-full h-40 sm:h-48 lg:h-52 overflow-hidden">
         {!isVideoError ? (
           <video
@@ -61,8 +61,8 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
             data-video-id={uniform.id}
           />
         ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <div className="text-gray-500 text-center">
+          <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <div className="text-gray-500 dark:text-gray-300 text-center">
               <svg
                 className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2"
                 fill="none"
@@ -83,17 +83,17 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
         
         {/* Loading indicator */}
         {!isVideoLoaded && !isVideoError && (
-          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-black"></div>
+          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-black dark:border-white"></div>
           </div>
         )}
 
         {/* Play icon overlay */}
         {isVideoLoaded && !isVideoError && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="bg-black bg-opacity-50 rounded-full p-2 sm:p-3">
+            <div className="bg-black dark:bg-white bg-opacity-50 dark:bg-opacity-70 rounded-full p-2 sm:p-3">
               <svg
-                className="w-4 h-4 sm:w-6 sm:h-6 text-white"
+                className="w-4 h-4 sm:w-6 sm:h-6 text-white dark:text-black"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -105,7 +105,7 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
       </div>
       
       <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
-        <h2 className="text-base sm:text-lg font-medium text-black mb-2 uppercase tracking-wide transition-colors duration-300 ease-out group-hover:text-gray-800">
+        <h2 className="text-base sm:text-lg font-medium text-black dark:text-white mb-2 uppercase tracking-wide transition-colors duration-300 ease-out group-hover:text-gray-800 dark:group-hover:text-gray-200">
           {uniform.name}
         </h2>
         
@@ -113,14 +113,14 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
           <div className="mb-3 sm:mb-4">
             {isExpanded && (
               <div className="mb-2">
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   {uniform.description}
                 </p>
               </div>
             )}
             <button
               onClick={handleToggleDescription}
-              className="text-xs text-gray-500 hover:text-black font-medium tracking-wide transition-colors duration-200"
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white font-medium tracking-wide transition-colors duration-200"
               aria-label={isExpanded ? "Ocultar información" : "Leer información"}
             >
               {isExpanded ? "Ocultar información" : "Leer información"}
@@ -136,7 +136,7 @@ const UniformCard: React.FC<UniformCardProps> = ({ uniform }) => {
             uniformDescription: uniform.description,
             uniformVideoUrl: uniform.videoUrl,
           }}
-          className="inline-block mt-auto text-xs font-medium text-black hover:underline tracking-wide transition-all duration-300 ease-out transform hover:translate-x-1 hover:text-gray-700"
+          className="inline-block mt-auto text-xs font-medium text-black dark:text-white hover:underline tracking-wide transition-all duration-300 ease-out transform hover:translate-x-1 hover:text-gray-700 dark:hover:text-gray-200"
           aria-label={`Ver cursos de ${uniform.name}`}
         >
           Ver cursos

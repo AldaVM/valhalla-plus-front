@@ -73,7 +73,7 @@ const UniformCourseDetailPage: React.FC = () => {
           poster={data.course.thumbnailUrl}
         />
       </div>
-      <h1 className="text-2xl font-bold mb-2">{data.course.title}</h1>
+      <h1 className="text-2xl font-bold mb-2 text-black dark:text-white">{data.course.title}</h1>
       <p className="text-gray-600 mb-4">{data.course.description}</p>
       <div className="flex justify-between mt-8">
         <button
@@ -84,10 +84,19 @@ const UniformCourseDetailPage: React.FC = () => {
               `/uniforms/${uniformId}/courses/${data.previous.id}?${searchParams.toString()}`
             )
           }
-          className="p-2 border border-gray-300 text-black font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black hover:text-white"
+          className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Curso anterior"
         >
-          &lt;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span className="text-sm font-medium hidden sm:inline">Anterior</span>
         </button>
         <button
           disabled={!data.next}
@@ -97,10 +106,19 @@ const UniformCourseDetailPage: React.FC = () => {
               `/uniforms/${uniformId}/courses/${data.next.id}?${searchParams.toString()}`
             )
           }
-          className="p-2 border border-gray-300 text-black font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black hover:text-white"
+          className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-white hover:text-black border border-black transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Curso siguiente"
         >
-          &gt;
+          <span className="text-sm font-medium hidden sm:inline">Siguiente</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </div>
     </div>

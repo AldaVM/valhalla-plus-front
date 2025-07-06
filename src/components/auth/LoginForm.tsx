@@ -10,6 +10,7 @@ import {
 import ActiveSessionsModal from "./ActiveSessionsModal";
 import AccountBlockedModal from "./AccountBlockedModal";
 import LoginAttemptsWarning from "./LoginAttemptsWarning";
+import WelcomeModal from "./WelcomeModal";
 
 function LoginForm() {
   const {
@@ -33,6 +34,12 @@ function LoginForm() {
     email: string;
     password: string;
   } | null>(null);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [welcomeData, setWelcomeData] = useState<{
+    message: string;
+    userName: string;
+    response: any;
+  } | null>(null);
 
   const initialValues = {
     email: "",
@@ -50,8 +57,20 @@ function LoginForm() {
   const handleSubmit = async (values: any) => {
     try {
       const response = await loginApi(values.email, values.password);
-      login(response.access_token, response.user);
-      navigate("/contenido");
+      
+      // Verificar si hay mensaje de bienvenida
+      if (response.user.welcomeMessage && response.user.welcomeMessage.trim()) {
+        setWelcomeData({
+          message: response.user.welcomeMessage,
+          userName: response.user.name || response.user.email,
+          response: response,
+        });
+        setShowWelcomeModal(true);
+      } else {
+        // Si no hay mensaje de bienvenida, hacer login directamente
+        login(response.access_token, response.user);
+        navigate("/contenido");
+      }
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message || "Credenciales incorrectas";
@@ -124,6 +143,16 @@ function LoginForm() {
     setError("");
   };
 
+  const handleCloseWelcomeModal = () => {
+    setShowWelcomeModal(false);
+    // Hacer login después de cerrar el modal
+    if (welcomeData) {
+      login(welcomeData.response.access_token, welcomeData.response.user);
+      navigate("/contenido");
+    }
+    setWelcomeData(null);
+  };
+
   const handleRetryLogin = async () => {
     if (!loginCredentials) return;
 
@@ -133,8 +162,20 @@ function LoginForm() {
         loginCredentials.email,
         loginCredentials.password
       );
-      login(response.access_token, response.user);
-      navigate("/roadmaps");
+      
+      // Verificar si hay mensaje de bienvenida
+      if (response.user.welcomeMessage && response.user.welcomeMessage.trim()) {
+        setWelcomeData({
+          message: response.user.welcomeMessage,
+          userName: response.user.name || response.user.email,
+          response: response,
+        });
+        setShowWelcomeModal(true);
+      } else {
+        // Si no hay mensaje de bienvenida, hacer login directamente
+        login(response.access_token, response.user);
+        navigate("/roadmaps");
+      }
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.message || "Error al reintentar login";
@@ -178,7 +219,7 @@ function LoginForm() {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  className="w-full px-4 py-3 border border-gray-300 focus:border-gray-900 focus:outline-none text-sm font-light tracking-wide transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-gray-900 focus:outline-none text-sm font-light tracking-wide transition-colors bg-white text-gray-900 placeholder-gray-500"
                   aria-label="Email"
                 />
                 <ErrorMessage
@@ -194,7 +235,7 @@ function LoginForm() {
                   type="password"
                   name="password"
                   placeholder="Contraseña"
-                  className="w-full px-4 py-3 border border-gray-300 focus:border-gray-900 focus:outline-none text-sm font-light tracking-wide transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-gray-900 focus:outline-none text-sm font-light tracking-wide transition-colors bg-white text-gray-900 placeholder-gray-500"
                   aria-label="Contraseña"
                 />
                 <ErrorMessage
@@ -260,6 +301,16 @@ function LoginForm() {
           isOpen={showBlockedModal}
           onClose={handleCloseBlockedModal}
           email={blockedEmail}
+        />
+      )}
+
+      {/* Modal de Bienvenida */}
+      {showWelcomeModal && welcomeData && (
+        <WelcomeModal
+          isOpen={showWelcomeModal}
+          onClose={handleCloseWelcomeModal}
+          welcomeMessage={welcomeData.message}
+          userName={welcomeData.userName}
         />
       )}
     </div>

@@ -159,13 +159,13 @@ const ContenidoPage: React.FC = () => {
         <div className="flex items-center justify-between mb-4">
           <Link
             to="/roadmaps"
-            className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black hover:underline"
+            className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black dark:text-white hover:underline"
           >
             Rutas de aprendizaje
           </Link>
           <Link
             to="/roadmaps"
-            className="text-xs font-medium text-gray-500 hover:text-black transition-colors"
+            className="text-xs font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors"
           >
             Ver todo
           </Link>
@@ -258,13 +258,13 @@ const ContenidoPage: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <Link
               to={`/uniforms/${gi.id}/courses`}
-              className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black hover:underline"
+              className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black dark:text-white hover:underline"
             >
               {gi.name}
             </Link>
             <Link
               to={`/uniforms/${gi.id}/courses`}
-              className="text-xs font-medium text-gray-500 hover:text-black transition-colors"
+              className="text-xs font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors"
             >
               Ver todo
             </Link>
@@ -373,13 +373,13 @@ const ContenidoPage: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <Link
               to={`/uniforms/${nogi.id}/courses`}
-              className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black hover:underline"
+              className="text-lg sm:text-xl font-bold uppercase tracking-wide text-black dark:text-white hover:underline"
             >
               {nogi.name}
             </Link>
             <Link
               to={`/uniforms/${nogi.id}/courses`}
-              className="text-xs font-medium text-gray-500 hover:text-black transition-colors"
+              className="text-xs font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors"
             >
               Ver todo
             </Link>

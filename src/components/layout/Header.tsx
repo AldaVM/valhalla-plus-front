@@ -4,6 +4,7 @@ import useAuth from "../../hooks/auth/useAuth";
 import LogoutConfirm from "../auth/LogoutConfirm";
 import ActiveSessionsModal from "../auth/ActiveSessionsModal";
 import { getActiveSessionsApi } from "../../services/auth/api";
+import ThemeToggle from "../common/ThemeToggle";
 
 const Header = () => {
   const {
@@ -80,10 +81,10 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white border-b border-black">
+    <header className="w-full sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-black dark:border-gray-700 transition-colors">
       <div className="w-full px-4 md:px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-xl font-bold tracking-wide text-black focus:outline-none">
+        <h1 className="text-xl font-bold tracking-wide text-black dark:text-white focus:outline-none transition-colors">
           VALHALLA JIU JITSU +
         </h1>
         {/* Opciones desktop/tablet */}
@@ -91,7 +92,7 @@ const Header = () => {
           {isAuthenticated && (
             <Link
               to="/contenido"
-              className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
+              className="text-sm font-medium tracking-wide text-black dark:text-white focus:underline focus:outline-none"
               aria-label="Contenido"
               tabIndex={0}
             >
@@ -100,7 +101,7 @@ const Header = () => {
           )}
           <Link
             to="/roadmaps"
-            className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
+            className="text-sm font-medium tracking-wide text-black dark:text-white focus:underline focus:outline-none"
             aria-label="Rutas de aprendizaje"
             tabIndex={0}
           >
@@ -108,16 +109,17 @@ const Header = () => {
           </Link>
           <Link
             to="/uniforms"
-            className="text-sm font-medium tracking-wide text-black focus:underline focus:outline-none"
+            className="text-sm font-medium tracking-wide text-black dark:text-white focus:underline focus:outline-none"
             aria-label="Uniformes"
             tabIndex={0}
           >
             GI / NOGI
           </Link>
+          <ThemeToggle size="sm" />
           {!isAuthenticated && (
             <Link
               to="/login"
-              className="hidden md:inline-block bg-black text-white font-bold rounded px-6 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition w-auto text-center"
+              className="hidden md:inline-block bg-black dark:bg-white text-white dark:text-black font-bold rounded px-6 py-2 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition w-auto text-center"
               aria-label="Iniciar sesión"
               tabIndex={0}
             >
@@ -127,7 +129,7 @@ const Header = () => {
           {isAuthenticated && (
             <>
               <span
-                className="text-sm text-black"
+                className="text-sm text-black dark:text-white"
                 tabIndex={0}
                 aria-label="Usuario conectado"
               >
@@ -135,7 +137,7 @@ const Header = () => {
               </span>
               <button
                 onClick={handleSessions}
-                className="text-sm font-medium text-black focus:underline focus:outline-none hover:text-gray-600 transition-colors"
+                className="text-sm font-medium text-black dark:text-white focus:underline focus:outline-none hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 aria-label="Ver sesiones activas"
                 tabIndex={0}
               >
@@ -159,7 +161,7 @@ const Header = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="text-sm font-medium text-black focus:underline focus:outline-none hover:text-gray-600 transition-colors"
+                className="text-sm font-medium text-black dark:text-white focus:underline focus:outline-none hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 aria-label="Cerrar sesión"
                 tabIndex={0}
               >
@@ -172,34 +174,38 @@ const Header = () => {
         {!isAuthenticated && (
           <Link
             to="/login"
-            className="md:hidden w-full block bg-black text-white font-bold rounded px-6 py-3 text-base focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition text-center mt-2"
+            className="md:hidden w-full block bg-black dark:bg-white text-white dark:text-black font-bold rounded px-6 py-3 text-base focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition text-center mt-2"
             aria-label="Iniciar sesión"
             tabIndex={0}
           >
             Iniciar sesión
           </Link>
         )}
-        {/* Burger menu solo en móvil */}
-        <button
-          className="md:hidden p-2 focus:outline-none"
-          aria-label="Abrir menú"
-          onClick={() => setShowDrawer(true)}
-          tabIndex={0}
-        >
-          <svg
-            className="w-6 h-6 text-black"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* Theme toggle for mobile */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle size="sm" />
+          {/* Burger menu solo en móvil */}
+          <button
+            className="p-2 focus:outline-none"
+            aria-label="Abrir menú"
+            onClick={() => setShowDrawer(true)}
+            tabIndex={0}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+            <svg
+              className="w-6 h-6 text-black dark:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       {/* Drawer lateral solo móvil */}
       {showDrawer && (
@@ -212,12 +218,12 @@ const Header = () => {
           {/* Drawer */}
           <nav
             ref={drawerRef}
-            className="relative z-10 ml-auto w-64 h-full bg-white border-l border-black flex flex-col p-6 focus:outline-none"
+            className="relative z-10 ml-auto w-64 h-full bg-white dark:bg-gray-900 border-l border-black dark:border-gray-700 flex flex-col p-6 focus:outline-none transition-colors"
             tabIndex={0}
             aria-label="Menú lateral"
           >
             <div className="flex justify-between items-center mb-8">
-              <span className="text-lg font-medium text-black">Menú</span>
+              <span className="text-lg font-medium text-black dark:text-white transition-colors">Menú</span>
               <button
                 onClick={() => setShowDrawer(false)}
                 aria-label="Cerrar menú"
@@ -225,7 +231,7 @@ const Header = () => {
                 tabIndex={0}
               >
                 <svg
-                  className="w-6 h-6 text-black"
+                  className="w-6 h-6 text-black dark:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -241,7 +247,7 @@ const Header = () => {
             </div>
             <Link
               to="/"
-              className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+              className="mb-6 text-base font-medium text-black dark:text-white focus:underline focus:outline-none transition-colors"
               aria-label="Inicio"
               tabIndex={0}
               onClick={() => setShowDrawer(false)}
@@ -251,7 +257,7 @@ const Header = () => {
             {isAuthenticated && (
               <Link
                 to="/contenido"
-                className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+                className="mb-6 text-base font-medium text-black dark:text-white focus:underline focus:outline-none transition-colors"
                 aria-label="Contenido"
                 tabIndex={0}
                 onClick={() => setShowDrawer(false)}
@@ -261,7 +267,7 @@ const Header = () => {
             )}
             <Link
               to="/roadmaps"
-              className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+              className="mb-6 text-base font-medium text-black dark:text-white focus:underline focus:outline-none transition-colors"
               aria-label="Rutas de aprendizaje"
               tabIndex={0}
               onClick={() => setShowDrawer(false)}
@@ -270,7 +276,7 @@ const Header = () => {
             </Link>
             <Link
               to="/uniforms"
-              className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+              className="mb-6 text-base font-medium text-black dark:text-white focus:underline focus:outline-none transition-colors"
               aria-label="Uniformes"
               tabIndex={0}
               onClick={() => setShowDrawer(false)}
@@ -279,10 +285,10 @@ const Header = () => {
             </Link>
             {isAuthenticated && (
               <>
-                <div className="mb-4 text-sm text-black">{user?.name}</div>
+                <div className="mb-4 text-sm text-black dark:text-white transition-colors">{user?.name}</div>
                 <button
                   onClick={handleSessions}
-                  className="mb-4 text-base font-medium text-black text-left focus:underline focus:outline-none"
+                  className="mb-4 text-base font-medium text-black dark:text-white text-left focus:underline focus:outline-none transition-colors"
                   aria-label="Ver sesiones activas"
                   tabIndex={0}
                 >
@@ -308,7 +314,7 @@ const Header = () => {
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="text-base font-medium text-black text-left focus:underline focus:outline-none"
+                  className="text-base font-medium text-black dark:text-white text-left focus:underline focus:outline-none transition-colors"
                   aria-label="Cerrar sesión"
                   tabIndex={0}
                 >

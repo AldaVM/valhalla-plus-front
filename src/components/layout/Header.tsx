@@ -245,15 +245,6 @@ const Header = () => {
                 </svg>
               </button>
             </div>
-            <Link
-              to="/"
-              className="mb-6 text-base font-medium text-black dark:text-white focus:underline focus:outline-none transition-colors"
-              aria-label="Inicio"
-              tabIndex={0}
-              onClick={() => setShowDrawer(false)}
-            >
-              Inicio
-            </Link>
             {isAuthenticated && (
               <Link
                 to="/contenido"

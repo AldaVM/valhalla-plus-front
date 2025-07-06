@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import {
   loginApi,
   getActiveSessionsByEmailApi,
-  getAccountStatusApi,
 } from "../../services/auth/api";
 import ActiveSessionsModal from "./ActiveSessionsModal";
 import AccountBlockedModal from "./AccountBlockedModal";
@@ -28,7 +27,7 @@ function LoginForm() {
   const [remainingAttempts, setRemainingAttempts] = useState<number | null>(
     null
   );
-  const [maxAttempts, setMaxAttempts] = useState<number>(3);
+  const [maxAttempts] = useState<number>(3);
   const [failedAttempts, setFailedAttempts] = useState<number>(0);
   const [loginCredentials, setLoginCredentials] = useState<{
     email: string;

@@ -248,6 +248,17 @@ const Header = () => {
             >
               Inicio
             </Link>
+            {isAuthenticated && (
+              <Link
+                to="/contenido"
+                className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
+                aria-label="Contenido"
+                tabIndex={0}
+                onClick={() => setShowDrawer(false)}
+              >
+                Contenido
+              </Link>
+            )}
             <Link
               to="/roadmaps"
               className="mb-6 text-base font-medium text-black focus:underline focus:outline-none"
